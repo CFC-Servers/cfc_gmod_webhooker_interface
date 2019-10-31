@@ -1,10 +1,10 @@
 require "moonscript"
 
-getWebhookerUrl = ->
-    contents = file.Read "cfc/webhooker/url.txt", "DATA"
-    string.gsub contents, "%s", ""
-
-webhookerUrl = getWebhookerUrl!
+webhookerUrl = (
+    ->
+        contents = file.Read "cfc/webhooker/url.txt", "DATA"
+        string.gsub contents, "%s", ""
+)!
 
 onSuccess = (success) -> print(success)
 onFailure = (failure) -> print(failure)
