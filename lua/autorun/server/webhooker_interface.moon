@@ -7,7 +7,7 @@ webhookerUrl = (
 )!
 
 onSuccess = (success) -> print success
-onFailure = (failure) -> print(failure)
+onFailure = (failure) -> print failure
 
 export WebhookerInterface
 class WebhookerInterface
