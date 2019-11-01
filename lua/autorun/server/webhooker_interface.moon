@@ -6,7 +6,7 @@ webhookerUrl = (
         string.gsub contents, "%s", ""
 )!
 
-onSuccess = (success) -> print(success)
+onSuccess = (success) -> print success
 onFailure = (failure) -> print(failure)
 
 export WebhookerInterface
