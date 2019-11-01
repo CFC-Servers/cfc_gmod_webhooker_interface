@@ -12,7 +12,7 @@ onFailure = (failure) -> print failure
 export WebhookerInterface
 class WebhookerInterface
     new: =>
-        @baseUrl = webhookerUrl
+        @baseUrl = WebhookerUrl
         @onSuccess = onSuccess
         @onFailure = onFailure
 
