@@ -1,6 +1,6 @@
 require "moonscript"
 
-webhookerUrl = (
+WebhookerUrl = (
     ->
         contents = file.Read "cfc/webhooker/url.txt", "DATA"
         string.gsub contents, "%s", ""
