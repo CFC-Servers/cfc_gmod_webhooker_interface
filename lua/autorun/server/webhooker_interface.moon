@@ -10,7 +10,6 @@ onSuccess = (success) -> print(success)
 onFailure = (failure) -> print(failure)
 
 export WebhookerInterface
-
 class WebhookerInterface
     new: =>
         @baseUrl = webhookerUrl
@@ -18,6 +17,4 @@ class WebhookerInterface
         @onFailure = onFailure
 
     send: (endpoint, content={}, onSuccess=@onSuccess, onFailure=@onFailure) =>
-        data = util.TableToJSON content
-
-        http.Post "#{@baseUrl}/#{endpoint}", data, onSuccess, onFailure
+        http.Post "#{@baseUrl}/#{endpoint}", content, onSuccess, onFailure
