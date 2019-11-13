@@ -45,5 +45,5 @@ do
   })
   _base_0.__class = _class_0
   WebhookerInterface = _class_0
-  return _class_0
 end
+return print("[WebhookerInterface] Loaded!")

@@ -16,3 +16,5 @@ class WebhookerInterface
 
     send: (endpoint, content={}, onSuccess=@onSuccess, onFailure=@onFailure) =>
         http.Post "#{@baseUrl}/#{endpoint}", content, onSuccess, onFailure
+
+print("[WebhookerInterface] Loaded!")
