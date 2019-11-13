@@ -2,36 +2,32 @@ local WebhookerUrl = (function()
   local contents = file.Read("cfc/webhooker/url.txt", "DATA")
   return string.gsub(contents, "%s", "")
 end)()
-local onSuccess
-onSuccess = function(success)
-  return print(success)
-end
-local onFailure
-onFailure = function(failure)
-  return print(failure)
-end
 do
   local _class_0
   local _base_0 = {
-    send = function(self, endpoint, content, onSuccess, onFailure)
+    send = function(self, endpoint, content, on_success, on_failure)
       if content == nil then
         content = { }
       end
-      if onSuccess == nil then
-        onSuccess = self.onSuccess
+      if on_success == nil then
+        on_success = self.on_success
       end
-      if onFailure == nil then
-        onFailure = self.onFailure
+      if on_failure == nil then
+        on_failure = self.on_failure
       end
-      return http.Post(tostring(self.baseUrl) .. "/" .. tostring(endpoint), content, onSuccess, onFailure)
+      return http.Post(tostring(self.base_url) .. "/" .. tostring(endpoint), content, on_success, on_failure)
     end
   }
   _base_0.__index = _base_0
   _class_0 = setmetatable({
     __init = function(self)
-      self.baseUrl = WebhookerUrl
-      self.onSuccess = onSuccess
-      self.onFailure = onFailure
+      self.base_url = WebhookerUrl
+      self.on_success = function(success)
+        return print(success)
+      end
+      self.on_failure = function(failure)
+        return print(failure)
+      end
     end,
     __base = _base_0,
     __name = "WebhookerInterface"

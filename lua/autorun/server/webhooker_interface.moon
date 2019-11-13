@@ -4,17 +4,14 @@ WebhookerUrl = (
         string.gsub contents, "%s", ""
 )!
 
-onSuccess = (success) -> print success
-onFailure = (failure) -> print failure
-
 export WebhookerInterface
 class WebhookerInterface
     new: =>
-        @baseUrl = WebhookerUrl
-        @onSuccess = onSuccess
-        @onFailure = onFailure
+        @base_url = WebhookerUrl
+        @on_success = (success) -> print success
+        @on_failure = (failure) -> print failure
 
-    send: (endpoint, content={}, onSuccess=@onSuccess, onFailure=@onFailure) =>
-        http.Post "#{@baseUrl}/#{endpoint}", content, onSuccess, onFailure
+    send: (endpoint, content={}, on_success=@on_success, on_failure=@on_failure) =>
+        http.Post "#{@base_url}/#{endpoint}", content, on_success, on_failure
 
 print("[WebhookerInterface] Loaded!")
