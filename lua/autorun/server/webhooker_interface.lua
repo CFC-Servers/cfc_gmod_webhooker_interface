@@ -15,10 +15,9 @@ do
       if on_failure == nil then
         on_failure = self.on_failure
       end
-      local url = tostring(self.base_url) .. "/" .. tostring(endpoint)
-      print(url)
-      print(content)
-      return http.Post(tostring(self.base_url) .. "/webhooks/gmod/" .. tostring(endpoint), content, on_success, on_failure)
+      local url = tostring(self.base_url) .. "/webhooks/gmod/" .. tostring(endpoint)
+      PrintTable(content)
+      return http.Post(url, content, on_success, on_failure)
     end
   }
   _base_0.__index = _base_0

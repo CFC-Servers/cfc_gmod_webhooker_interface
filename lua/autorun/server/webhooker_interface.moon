@@ -12,9 +12,8 @@ class WebhookerInterface
         @on_failure = (failure) -> print failure
 
     send: (endpoint, content={}, on_success=@on_success, on_failure=@on_failure) =>
-        url = "#{@base_url}/#{endpoint}"
-        print url
-        print content
-        http.Post "#{@base_url}/webhooks/gmod/#{endpoint}", content, on_success, on_failure
+        url = "#{@base_url}/webhooks/gmod/#{endpoint}"
+        PrintTable content
+        http.Post url, content, on_success, on_failure
 
 print("[WebhookerInterface] Loaded!")
