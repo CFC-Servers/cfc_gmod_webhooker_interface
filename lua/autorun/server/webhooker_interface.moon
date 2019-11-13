@@ -1,5 +1,3 @@
-require "moonscript"
-
 WebhookerUrl = (
     ->
         contents = file.Read "cfc/webhooker/url.txt", "DATA"
