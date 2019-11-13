@@ -13,7 +13,6 @@ class WebhookerInterface
 
     send: (endpoint, content={}, on_success=@on_success, on_failure=@on_failure) =>
         url = "#{@base_url}/webhooks/gmod/#{endpoint}"
-        PrintTable content
         http.Post url, content, on_success, on_failure
 
 print("[WebhookerInterface] Loaded!")

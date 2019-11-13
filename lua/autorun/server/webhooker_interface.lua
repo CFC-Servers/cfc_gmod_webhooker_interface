@@ -16,7 +16,6 @@ do
         on_failure = self.on_failure
       end
       local url = tostring(self.base_url) .. "/webhooks/gmod/" .. tostring(endpoint)
-      PrintTable(content)
       return http.Post(url, content, on_success, on_failure)
     end
   }
