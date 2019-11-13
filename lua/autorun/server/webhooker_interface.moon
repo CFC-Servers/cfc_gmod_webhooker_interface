@@ -15,6 +15,6 @@ class WebhookerInterface
         url = "#{@base_url}/#{endpoint}"
         print url
         print content
-        http.Post "#{@base_url}/#{endpoint}", content, on_success, on_failure
+        http.Post "#{@base_url}/webhooks/gmod/#{endpoint}", content, on_success, on_failure
 
 print("[WebhookerInterface] Loaded!")

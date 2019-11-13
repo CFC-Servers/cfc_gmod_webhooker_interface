@@ -18,7 +18,7 @@ do
       local url = tostring(self.base_url) .. "/" .. tostring(endpoint)
       print(url)
       print(content)
-      return http.Post(tostring(self.base_url) .. "/" .. tostring(endpoint), content, on_success, on_failure)
+      return http.Post(tostring(self.base_url) .. "/webhooks/gmod/" .. tostring(endpoint), content, on_success, on_failure)
     end
   }
   _base_0.__index = _base_0
