@@ -16,10 +16,14 @@ do
         on_failure = self.on_failure
       end
       local url = tostring(self.base_url) .. "/webhooks/gmod/" .. tostring(endpoint)
+      print("[WebhookInterface] Sending the following form to " .. tostring(url) .. ":")
       PrintTable(content)
+      print("")
       local http_content = { }
       for k, v in pairs(content) do
-        http_content[tostring(k)] = tostring(v)
+        local string_k = tostring(k)
+        local string_v = tostring(v)
+        http_content[string_k] = string_v
       end
       return http.Post(url, http_content, on_success, on_failure)
     end

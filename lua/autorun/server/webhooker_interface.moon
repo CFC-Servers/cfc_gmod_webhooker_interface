@@ -14,12 +14,17 @@ class WebhookerInterface
     send: (endpoint, content={}, on_success=@on_success, on_failure=@on_failure) =>
         url = "#{@base_url}/webhooks/gmod/#{endpoint}"
 
+        print "[WebhookInterface] Sending the following form to #{url}:"
         PrintTable content
+        print ""
 
         -- Keys and values must be strings
         http_content = {}
         for k, v in pairs content
-            http_content[tostring k] = tostring v
+            string_k = tostring k
+            string_v = tostring v
+
+            http_content[string_k] = string_v
 
         http.Post url, http_content, on_success, on_failure
 
