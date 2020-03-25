@@ -19,6 +19,7 @@ class WebhookerInterface
             success: on_success,
             failed: on_failure,
             method: "POST",
+            type: "application/json",
             :url,
             :body
 
