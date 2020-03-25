@@ -13,19 +13,13 @@ class WebhookerInterface
 
     send: (endpoint, content={}, on_success=@on_success, on_failure=@on_failure) =>
         url = "#{@base_url}/webhooks/gmod/#{endpoint}"
+        body = util.TableToJSON content
 
-        print "[WebhookInterface] Sending the following form to #{url}:"
-        PrintTable content
-        print ""
-
-        -- Keys and values must be strings
-        http_content = {}
-        for k, v in pairs content
-            string_k = tostring k
-            string_v = tostring v
-
-            http_content[string_k] = string_v
-
-        http.Post url, http_content, on_success, on_failure
+        HTTP
+            success: on_success,
+            failed: on_failure,
+            method: "POST",
+            :url,
+            :body
 
 print("[WebhookerInterface] Loaded!")
