@@ -4,16 +4,19 @@ import TableToJSON from util
 import Read from file
 import gsub from string
 
+getContents = (cfcPath) ->
+    contents = Read "cfc/#{cfcPath}", "DATA"
+    gsub contents, "%s", ""
+
 LOGGER = CFCLogger "CFC Webhooker Interface"
-REALM = Read "cfc/realm.txt", "DATA"
-WEBHOOKER_URL = (
-    ->
-        contents = Read "cfc/webhooker/url.txt", "DATA"
-        gsub contents, "%s", ""
-)!
+REALM = getContents "realm.txt"
+WEBHOOKER_URL = getContents "webhooker/url.txt"
 
 unless REALM
     return LOGGER\fatal "No realm set in cfc/realm.txt! Cannot load."
+
+unless WEBHOOKER_URL
+    return LOGGER\fatal "No webhooker URL set in cfc/webhooker/url.txt! Cannot load."
 
 export WebhookerInterface
 class WebhookerInterface
