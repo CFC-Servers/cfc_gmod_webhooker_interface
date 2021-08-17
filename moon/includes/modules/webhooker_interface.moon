@@ -1,4 +1,4 @@
-require "cfclogger"
+require "logger"
 
 import TableToJSON from util
 import Read from file
@@ -8,7 +8,7 @@ getContents = (cfcPath) ->
     contents = Read "cfc/#{cfcPath}", "DATA"
     gsub contents, "%s", ""
 
-LOGGER = CFCLogger "CFC Webhooker Interface"
+LOGGER = Logger "CFC Webhooker Interface"
 REALM = getContents "realm.txt"
 WEBHOOKER_URL = getContents "webhooker/url.txt"
 
