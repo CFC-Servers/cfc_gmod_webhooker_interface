@@ -1,34 +1,25 @@
 require "logger"
-
 import TableToJSON from util
-import Read from file
-import gsub from string
 
-getContents = (cfcPath) ->
-    contents = Read "cfc/#{cfcPath}", "DATA"
-    gsub contents, "%s", ""
-
-LOGGER = Logger "CFC Webhooker Interface"
-REALM = getContents "realm.txt"
-WEBHOOKER_URL = getContents "webhooker/url.txt"
-
-unless REALM
-    return LOGGER\fatal "No realm set in cfc/realm.txt! Cannot load."
-
-unless WEBHOOKER_URL
-    return LOGGER\fatal "No webhooker URL set in cfc/webhooker/url.txt! Cannot load."
+logger = Logger "CFC Webhooker Interface"
+realm = CreateConVar "cfc_realm", "unknown", FCVAR_REPLICATED + FCVAR_ARCHIVE
+url = CreateConVar "cfc_webhooker_url", "", FCVAR_PROTECTED
+disabled = CreateConVar "cfc_webhooker_disabled", "false", FCVAR_PROTECTED
 
 export WebhookerInterface
 class WebhookerInterface
+    @disabled = disabled
+
     new: =>
-        @baseURL = WEBHOOKER_URL
-        @onSuccess = (success) -> LOGGER\info success
-        @onFailure = (failure) -> LOGGER\error failure
+        @baseURL = url\GetString!
+        @onSuccess = (success) -> logger\info success
+        @onFailure = (failure) -> logger\error failure
 
     send: (endpoint, content={}, onSuccess=@onSuccess, onFailure=@onFailure) =>
-        url = "#{@baseURL}/webhooks/gmod/#{endpoint}"
+        return if @@disabled\GetBool!
 
-        content.realm or= REALM
+        url = "#{@baseURL}/webhooks/gmod/#{endpoint}"
+        content.realm or= realm\GetString!
         body = TableToJSON content
 
         HTTP
@@ -39,4 +30,4 @@ class WebhookerInterface
             :url
             :body
 
-LOGGER\info "Loaded!"
+logger\info "Loaded!"
