@@ -2,7 +2,7 @@ require "logger"
 import TableToJSON from util
 
 logger = Logger "CFC Webhooker Interface"
-REALM = CreateConVar "cfc_realm", "unknown", FCVAR_REPLICATED + FCVAR_ARCHIVE
+REALM = CreateConVar "cfc_realm", "unknown", FCVAR_REPLICATED + FCVAR_ARCHIVE, "The Realm Name"
 URL = CreateConVar "cfc_webhooker_url", "", FCVAR_PROTECTED
 DISABLED = CreateConVar "cfc_webhooker_disabled", 0, FCVAR_PROTECTED
 
